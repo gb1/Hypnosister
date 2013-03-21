@@ -18,18 +18,22 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     
+    CGRect screenRect = [[self window]bounds];
     
+    //create scrollview  to have the size of the window
+    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:screenRect];
+    [[self window]addSubview:scrollView];
     
-    HypnosisView *view = [[HypnosisView alloc]initWithFrame:[[self window] bounds]];
+    //create hypno view twice the size of the screen
+    CGRect bigRect = screenRect;
+    bigRect.size.width *= 2.0;
+    bigRect.size.height *= 2.0;
+    HypnosisView *view = [[HypnosisView alloc]initWithFrame:bigRect];
+    [scrollView addSubview:view];
+    [scrollView setContentSize:bigRect.size];
     
-    [[self window]addSubview:view];
+    //[[self window]addSubview:view];
     
-    BOOL success = [view becomeFirstResponder];
-    if(success){
-        NSLog(@"became first responder");
-    }else{
-        NSLog(@"not first responder");
-    }
     
     //CGRect anotherFrame = CGRectMake(20,30,50,50);
    // HypnosisView *anotherView = [[HypnosisView alloc]initWithFrame:anotherFrame];
